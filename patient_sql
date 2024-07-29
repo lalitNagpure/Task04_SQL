@@ -1,0 +1,87 @@
+create table patient(
+	id serial primary key,
+	name varchar(150),
+	age int,
+	room_no int
+)
+select * from patient
+
+insert into patient values (1,'Saurabh',55,102)
+insert into patient values (2,'Ram',64,104)
+insert into patient values (3,'Sham',57,106)
+insert into patient values (4,'Radhesham',57,108)
+
+copy patient 'G:\DATA ANALYTICS ARC\patient_data.csv' DELIMITER ',' csv header
+
+-- types of querys
+
+--1. Distict query
+	
+select * from patient
+	
+select age from patient
+select distinct age from patient
+select distinct room_no from patient
+
+--2. where query
+	
+select * from patient
+	
+select* from patient where age = 64
+select* from patient where age = 57
+select name,id from patient where age = 57
+	
+a.AND operator
+	
+select * from patient where id = 1 AND age = 55
+	
+b.OR operator
+	
+select * from patient where id = 1 OR age = 64
+	
+c.Not operator
+	
+select * from patient where not age = 55
+	
+d.Between
+	
+select * from patient where id >= 2 AND id <= 4
+
+--3. update query
+	
+select * from patient
+update patient set id='1001'where id = 2
+update patient set id='1004'where id = 4
+
+--4. delete query
+	
+select * from patient 
+delete from patient where id = 1004
+rollback
+
+--5. Alter query
+	
+select * from patient
+	
+alter table patient add column mob_no double precision
+	
+update patient set mob_no= 12345678 where id = 6
+	
+alter table patient drop column mob_no
+
+--6. IN query
+	
+select * from patient 
+	
+select * from patient where id in (1,3,1001)
+
+--7. Constaint query
+	
+ALTER TABLE patient
+ADD CONSTRAINT check_age
+CHECK (age <=78);
+
+ALTER TABLE patient
+ADD CONSTRAINT check_name
+CHECK (name NOT IN ('a1','b1','check'));
+ 
